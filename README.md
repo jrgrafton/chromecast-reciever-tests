@@ -3,8 +3,6 @@
 
 This simple test application allows Chromecast developers to verify that their native sender application (Android or iOS) responds correctly to sender media requests.
 
-## Setup Instructions
-
 # Pre-requisites
 1. Get a Chromecast device
 2. Install appropriate Chrome browser
@@ -12,7 +10,7 @@ This simple test application allows Chromecast developers to verify that their n
 
 See the developer guide and release notes at https://developers.google.com/cast/ for more details.
  
-# Steps:
+# Test steps
 1. Launch your sender app on Android or iOS
 2. Connect to your Chromecast
 3. Play a piece of media
