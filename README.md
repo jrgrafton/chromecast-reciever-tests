@@ -17,7 +17,7 @@ This simple test application allows Chromecast developers to verify that their n
 2. Connect to your Chromecast
 3. Play a piece of media
 4. Pause the media
-5. Navigate to [this page]() and enter your ApplicationID to begin testing
+5. Navigate to [this page](http://jrgrafton.github.io/chromecast-reciever-tests/) and enter your ApplicationID to begin testing
 
 [What a successful run looks like](https://www.youtube.com/watch?v=37_TncJ-AzI&feature=youtu.be)
 
