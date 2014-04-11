@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Chromecast: Reciever MediaManager validation</title>
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script src="init.js"></script>
+  </head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="display:block">Chromecast: Reciever MediaManager validation</h1>
+        <p>A test suite to ensure Partners have abided by standarded Media Manager API's in their reciever app</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Tests</h2>
+        <p>Please follow the below procedure to test Reciever MediaManager compliancy</p>
+        <ol>
+          <li>Launch your sender app on Android or iOS</li>
+          <li>Connect to your Chromecast</li>
+          <li>Play a piece of media</li>
+          <li>Pause the media</li>
+          <li>Enter your AppID below and click "Start" to begin testing</li>
+        </ol>
+
+        <form class="form-inline" role="form" action="#">
+          <div class="form-group">
+            <label class="sr-only" for="app-id">Application ID</label>
+            <input class="form-control" id="app-id" placeholder="AppID" style="max-width:200px" value="5E448CA4">
+          </div>
+          <button type="submit" id="start-checks" class="btn btn-default">Start</button>
+        </form>
+      </div>
+    </div>
+    <div class="row" style="margin-top:1em">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <th>Test name</th>
+              <th>Result</th>
+            </thead>
+            <tbody>
+              <tr data-test="testMediaNameSpaceSupported">
+                <td>Namespace supported</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testVolumeRequest">
+                <td>VolumeRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testSeekRequest">
+                <td>SeekRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testPlayRequest">
+                <td>PlayRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testPauseRequest">
+                <td>PauseRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testStopRequest">
+                <td>StopRequest</td>
+                <td class="result">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <textarea class="form-control" rows="3" id="debugmessage" style="resize:none"></textarea>
+  </div>
+</body>
+</html>
