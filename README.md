@@ -6,11 +6,11 @@ This simple test application allows Chromecast developers to verify that their n
 ## Setup Instructions
 
 # Pre-requisites
- 1. Get a Chromecast device
- 2. Install appropriate Chrome browser
- 3. Install appropriate Chrome Cast extension
+1. Get a Chromecast device
+2. Install appropriate Chrome browser
+3. Install appropriate Chrome Cast extension
 
- See the developer guide and release notes at https://developers.google.com/cast/ for more details.
+See the developer guide and release notes at https://developers.google.com/cast/ for more details.
  
 # Steps:
 1. Launch your sender app on Android or iOS
