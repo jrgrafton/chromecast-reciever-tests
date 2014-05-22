@@ -1,0 +1,100 @@
+/*************************/
+/** Start global styles **/
+/*************************/
+body {
+  font-family: 'Open Sans', 'sans-serif';
+  font-size: 14px;
+  background-color: #fff;
+  color: #444;
+  overflow: scroll;
+}
+
+.hidden {
+  opacity: 0;
+}
+/* Purposely not made x-browser compatible since these tests
+will only ever work in Chrome */
+.fade-in {
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/***********************/
+/** End global styles **/
+/***********************/
+/*******************************/
+/** Start Bootstrap overrides **/
+/*******************************/
+h1 {
+  font-weight: 300;
+  font-size: 4em;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 2.30769230769230769231em; /* 30px */
+}
+
+h3 {
+  font-size: 1.53846153846153846154em; /* 20px */
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 1em;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: .83em;
+}
+h6 {
+  font-weight: 700;
+  font-size: .75em;
+}
+
+th {
+  background: #428bca;
+  color: white;
+}
+
+.btn, .form-control {
+  border-radius: 0px;
+}
+
+input[type=text] {
+  max-width: 172px;
+}
+
+textarea {
+  resize: none;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+/*****************************/
+/** End Bootstrap overrides **/
+/*****************************/
+
+/************************/
+/** Start specific CSS **/
+/************************/
+.container {
+  padding-bottom: 2em;
+}
+.auth-select .btn {
+  margin-right: 1em;
+  width: 174px;
+}
+form button[type="submit"] {
+  width: 84px;
+}
+
+/**********************/
+/** End specific CSS **/
+/**********************/

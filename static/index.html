@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Cast media protocol compliancy tests</title>
+
+    <!-- Remote styles -->
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- Local styles -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Remote scripts -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+
+    <!-- Local scripts -->
+    <script type="text/javascript">
+      // Global namespace
+      var mpctests = {};
+    </script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="display:block">Cast media protocol compliancy tests</h1>
+        <p>A test suite to ensure that your receiver app is compliant with Googles Cast Media protocol</p>
+      </div>
+    </div>
+    <div class="row instructions">
+      <div class="col-md-6">
+        <h2>Instructions</h2>
+        <span class="auth-select">
+          <p>Does your receiver app require custom authentication?</p>
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-primary auth" data-plugin="toggle" data-toggle-on=".auth, .tests, .debug" data-toggle-off=".auth-select">Yes</button><button class="btn btn-primary no-auth" data-plugin="toggle" data-toggle-on=".no-auth, .tests, .debug" data-toggle-off=".auth-select">No</button>
+            </div>
+          </div>
+        </span>
+
+        <div class="hidden auth">
+          <p>Please follow the below procedure to test Cast Media protocol compliancy</p>
+          <ol>
+            <li>Launch your sender app on Android or iOS</li>
+            <li>Connect to your Chromecast</li>
+            <li>Play a piece of media</li>
+            <li>Pause the media</li>
+            <li>Enter your AppID below and click "Start" to begin testing</li>
+          </ol>
+
+          <form class="form-inline" role="form" action="#">
+            <div class="form-group">
+              <label class="sr-only" for="app-id">Application ID</label>
+              <!-- Since the tests still need to be fully internally verified
+              the appIDis defaulted to what are found in Android-CastVideos
+              on Github -->
+              <input class="form-control app-id" name="app-id" placeholder="Your AppID" value="4F8B3483" type="text">
+            </div>
+            <button type="submit" class="btn btn-success">Start</button>
+          </form>
+        </div>
+
+        <div class="hidden no-auth">
+          <p>Please follow the below procedure to test Cast Media protocol compliancy</p>
+          <ol>
+            <li>Enter the URL of your publicly accessible media</li>
+            <li>Select the meta content type of your media</li>
+            <li>Enter your AppID, then click "Start" to begin testing</li>
+          </ol>
+
+          <form class="form-inline" role="form" action="#">
+            <div class="form-group">
+              <label class="sr-only" for="media-url">Media URL</label>
+
+              <!-- Since the tests still need to be fully internally verified
+              the appID, mediaURL and mediaTypes are defaulted to what are found
+              in Android-CastVideos on Github -->
+              <input class="form-control media-url" placeholder="Your media URL" value="http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4"  type="text">
+
+              <select class="form-control media-type">
+                <option value="video/mp4">video/mp4</option>
+                <option value="video/webm">video/webm</option>
+                <option value="audio/mpeg">audio/mpeg</option>
+                <option value="audio/ogg">audio/ogg</option>
+                <option value="audio/x-aac">audio/x-aac</option>
+              </select>
+
+              <label class="sr-only" for="app-id">Application ID</label>
+              <input type="text" class="form-control app-id" name="app-id" placeholder="Your AppID" value="4F8B3483"  type="text">
+            </div>
+            <button type="submit" class="btn btn-success">Start</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 hidden debug">
+        <h2>Debug</h2>
+        <textarea class="form-control" rows="6" id="debugmessage" disabled=true></textarea>
+      </div>
+    </div>
+
+    <div class="row hidden tests">
+      <div class="col-md-12">
+        <h2>Tests</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <th>Test name</th>
+              <th>Result</th>
+            </thead>
+            <tbody>
+              <tr data-test="testMediaNameSpaceSupported">
+                <td>Namespace supported</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testInvalidURL" class="hidden no-auth no-fade">
+                <td>InvalidURL</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testInvalidRequest">
+                <td>InvalidRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testPlayPauseRequest">
+                <td>PlayPauseRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testTimepointControl">
+                <td>TimepointControl</td>
+                <td class="result">-</td>
+              </tr>
+
+              <tr data-test="testStopRequest">
+                <td>StopRequest</td>
+                <td class="result">-</td>
+              </tr>
+              <tr data-test="testStopSessionRequest">
+                <td>StopSession</td>
+                <td class="result">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
