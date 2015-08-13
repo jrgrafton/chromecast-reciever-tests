@@ -570,14 +570,11 @@ mpctests.TestReciever.prototype.testTimepointControl_ = function(element) {
  */
 mpctests.TestReciever.prototype.testStopRequest_ = function(element) {
   
-  console.log("Starting the stop");
   this.session_.media[this.session_.media.length - 1].stop(null,
       function() {  
-        console.log("ALL OK");
         this.processTest_(element, true);
       }.bind(this),
       function(e) {
-        console.log("ERROR");
         this.processTest_(element, false, 'error while stopping media');
       }.bind(this)
   );
