@@ -472,8 +472,9 @@ mpctests.TestReciever.prototype.testInvalidRequest_ = function(element) {
  * @param {DOMElement} element DOMElement that spawned test
  */
 mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
-  var currentMedia = this.session_.media[0];
-  var currentState = this.session_.media[0].playerState;
+
+  var currentMedia = this.session_.media[ this.session_.media.length - 1];
+  var currentState = currentMedia.playerState;
 
   // Callback function executed once we've established stream is paused
   var playPauseTest_ = function() {
@@ -483,7 +484,7 @@ mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
       this.processTest_(element, false, 'expected current media state to ' +
           'be PAUSED after issuing pause() command');
     } else {
-      this.session_.media[0].play(new chrome.cast.media.PlayRequest(),
+      currentMedia.play(new chrome.cast.media.PlayRequest(),
           function() {
             // Assert that media is now playing
             currentState = currentMedia.playerState;
@@ -494,7 +495,7 @@ mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
                   ' to be PLAYING or BUFFERING after issuesing play() command');
             } else {
               // Finally, leave stream paused
-              this.session_.media[0].pause(null,
+              currentMedia.pause(null,
                   function() {
                     this.processTest_(element, true);
                   }.bind(this),
@@ -502,7 +503,7 @@ mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
                     this.processTest_(element, false,
                         'error during play/pause commands');
                   }.bind(this)
-              );
+              )
             }
           }.bind(this),
           function(e) {
@@ -519,6 +520,7 @@ mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
     // If it's playing, pause it
     this.session_.media[0].pause(null, playPauseTest_.bind(this),
         function(e) {
+
           this.processTest_(element, false, 'error during play/pause commands');
         }.bind(this)
     );
@@ -538,15 +540,16 @@ mpctests.TestReciever.prototype.testPlayPauseRequest_ = function(element) {
  * @param {DOMElement} element DOMElement that spawned test
  */
 mpctests.TestReciever.prototype.testTimepointControl_ = function(element) {
-  var testSeek = function() {
+      
     var request = new chrome.cast.media.SeekRequest();
+    var media = this.session_.media[this.session_.media.length - 1];
+    
     request.currentTime = Math.floor((Math.random() * 100) *
-        this.session_.media[0].media.duration / 100);
+        media.media.duration / 100);
 
-    this.session_.media[0].seek(request,
+    media.seek(request,
         function() {
-          var currentTime = this.session_.media[0].currentTime;
-          if (currentTime !== request.currentTime) {
+          if (media.currentTime !== request.currentTime) {
             this.processTest_(element, false, 'expected current media time ' +
                 'to match time that was seeked to');
           } else {
@@ -554,65 +557,27 @@ mpctests.TestReciever.prototype.testTimepointControl_ = function(element) {
           }
         }.bind(this),
         function(e) {
-          this.processTest_(element, false, 'error during seek command');
+          this.processTest_(element, false, 'error during seek command: ' + e);
         }.bind(this)
     );
-  }.bind(this);
-
-  // If we are in no-auth mode try and reload media at a time offset
-  if (this.mode === 'no-auth') {
-    var currentMediaURL = this.session_.media[0].media.contentId;
-    var currentMediaContentType = this.session_.media[0].media.contentType;
-
-    var playOffset = Math.floor((Math.random() * 100) *
-        this.session_.media[0].media.duration / 100);
-    var mediaInfo = new chrome.cast.media.MediaInfo(currentMediaURL);
-    mediaInfo.contentType = currentMediaContentType;
-
-    var request = new chrome.cast.media.LoadRequest(mediaInfo);
-    request.autoplay = true;
-    request.currentTime = playOffset;
-    this.session_.loadMedia(request,
-        function() {
-          var currentTime = this.session_.media[0].currentTime;
-          if (currentTime === playOffset) {
-            // Run remaining seek part of test
-            testSeek();
-          } else {
-            this.processTest_(element, false,
-                'expected currentTime to be advanced to playOffset');
-          }
-        }.bind(this),
-        function(e) {
-          this.processTest_(element, false, 'error during seek command');
-        }.bind(this)
-    );
-  } else {
-    // If we are in auth mode don't try and reload media,
-    // instead start seek tests immediately
-    testSeek();
-  }
 };
 
 
 /**
  * Tests stop request.
- * Ensures that the session has no current media after stop request is
- * issued.
  * @private
  * @param {DOMElement} element DOMElement that spawned test
  */
 mpctests.TestReciever.prototype.testStopRequest_ = function(element) {
-  this.session_.media[0].stop(null,
-      function() {
-        if (this.session_.media[0] == null) {
-          this.processTest_(element, true);
-        } else {
-          this.processTest_(element, false,
-              'expected current media to be null after issuing stop() command');
-        }
+  
+  console.log("Starting the stop");
+  this.session_.media[this.session_.media.length - 1].stop(null,
+      function() {  
+        console.log("ALL OK");
+        this.processTest_(element, true);
       }.bind(this),
       function(e) {
+        console.log("ERROR");
         this.processTest_(element, false, 'error while stopping media');
       }.bind(this)
   );
